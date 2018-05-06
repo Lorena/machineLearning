@@ -1,9 +1,10 @@
-DIR='/Users/lcsouza/MachineLearning/classifiers/basic/client_situation/'
+import pathlib
+DIR=str(pathlib.Path(__file__).resolve().parent)
 
 import pandas as pd
 from collections import Counter
 
-df = pd.read_csv(DIR + 'situacao_do_cliente.csv')
+df = pd.read_csv(DIR + '/situacao_do_cliente.csv')
 X_df = df[['recencia','frequencia', 'semanas_de_inscricao']]
 Y_df = df['situacao']
 

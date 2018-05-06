@@ -1,4 +1,5 @@
-DIR='/Users/lcsouza/MachineLearning/classifiers/basic/buy_after_access_pages/'
+import pathlib
+DIR=str(pathlib.Path(__file__).resolve().parent)
 
 import csv
 
@@ -6,7 +7,7 @@ def carregar_acessos():
     X = []
     Y = []
 
-    arquivo = open('acesso.csv', 'r')
+    arquivo = open(DIR + '/acesso.csv', 'r')
     leitor = csv.reader(arquivo)
 
     next(leitor)

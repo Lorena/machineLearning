@@ -1,4 +1,5 @@
-DIR='/Users/lcsouza/MachineLearning/classifiers/basic/buy_after_search_options/'
+import pathlib
+DIR=str(pathlib.Path(__file__).resolve().parent)
 
 from collections import Counter
 import pandas as pd
@@ -9,7 +10,7 @@ import pandas as pd
 # busca, logado
 # busca: 85.71% (7 testes)
 
-df = pd.read_csv(DIR + 'busca2.csv')
+df = pd.read_csv(DIR + '/busca2.csv')
 
 X_df = df[['home', 'busca', 'logado']]
 Y_df = df['comprou']
