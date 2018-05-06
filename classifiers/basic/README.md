@@ -1,0 +1,1 @@
+Algorítmos utilizados MultinomialNB e AdaBoostClassifier.
