@@ -55,7 +55,7 @@ def teste_real(modelo, validacao_dados, validacao_marcacoes):
 
 	taxa_de_acerto = 100.0 * total_de_acertos / total_de_elementos
 
-	msg = "Taxa de acerto do vencedor entre os dois algoritmos no mundo real: {0}".format(taxa_de_acerto)
+	msg = "Taxa de acerto do vencedor entre os algoritmos no mundo real: {0}".format(taxa_de_acerto)
 	print(msg)
 
 resultados = {}
@@ -63,14 +63,12 @@ resultados = {}
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.svm import LinearSVC
 modeloOneVsRestClassifier = OneVsRestClassifier(LinearSVC(random_state = 0))
-modeloOneVsRestClassifier.fit(treino_dados,treino_marcacoes)
 resultadoOneVsRestClassifier = fit_and_predict("OneVsRestClassifier", modeloOneVsRestClassifier, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
 resultados[resultadoOneVsRestClassifier] = modeloOneVsRestClassifier
 
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.svm import LinearSVC
 modeloOneVsRestClassifier = OneVsOneClassifier(LinearSVC(random_state = 0))
-modeloOneVsRestClassifier.fit(treino_dados,treino_marcacoes)
 resultadoOneVsRestClassifier = fit_and_predict("OneVsOneClassifier", modeloOneVsRestClassifier, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
 resultados[resultadoOneVsRestClassifier] = modeloOneVsRestClassifier
 
