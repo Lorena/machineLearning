@@ -29,8 +29,8 @@ fim_de_treino = tamanho_de_treino + tamanho_de_teste
 teste_dados = X[int(tamanho_de_treino):int(fim_de_treino)]
 teste_marcacoes = Y[int(tamanho_de_treino):int(fim_de_treino)]
 
-validacao_dados = X[int(fim_de_treino):]
-validacao_marcacoes = Y[int(fim_de_treino):]
+dados_reais = X[int(fim_de_treino):]
+marcacoes_reais = Y[int(fim_de_treino):]
 
 
 def fit_and_predict(nome, modelo, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes):
@@ -50,16 +50,16 @@ def fit_and_predict(nome, modelo, treino_dados, treino_marcacoes, teste_dados, t
 	print(msg)
 	return taxa_de_acerto
 
-def teste_real(modelo, validacao_dados, validacao_marcacoes):
-	resultado = modelo.predict(validacao_dados)
-	acertos = resultado == validacao_marcacoes
+def teste_real(modelo, dados_reais, marcacoes_reais):
+	resultado = modelo.predict(dados_reais)
+	acertos = resultado == marcacoes_reais
 
 	total_de_acertos = sum(acertos)
-	total_de_elementos = len(validacao_marcacoes)
+	total_de_elementos = len(marcacoes_reais)
 
 	taxa_de_acerto = 100.0 * total_de_acertos / total_de_elementos
 
-	msg = "Taxa de acerto do vencedor entre os dois algoritmos no mundo real: {0}".format(taxa_de_acerto)
+	msg = "Taxa de acerto do vencedor entre os tres algoritmos no mundo real: {0}".format(taxa_de_acerto)
 	print(msg)
 
 from sklearn.naive_bayes import MultinomialNB
@@ -70,16 +70,25 @@ from sklearn.ensemble import AdaBoostClassifier
 modeloAdaBoost = AdaBoostClassifier()
 resultadoAdaBoost = fit_and_predict("AdaBoostClassifier", modeloAdaBoost, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
 
-if resultadoMultinomial > resultadoAdaBoost:
-	vencedor = modeloMultinomial
+from sklearn import svm
+modeloSVM = svm.SVC(gamma=0.001, C=100)
+resultadoSVM = fit_and_predict("SVM", modeloSVM, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
+
+
+if resultadoMultinomial > resultadoAdaBoost and resultadoMultinomial > resultadoSVM:
+	modelo_vencedor = modeloMultinomial
 else:
-	vencedor = modeloAdaBoost
+	if resultadoAdaBoost > resultadoSVM:
+		modelo_vencedor = modeloAdaBoost
+	else:
+		modelo_vencedor = modeloSVM
 
-teste_real(vencedor, validacao_dados, validacao_marcacoes)
 
-acerto_base = max(Counter(validacao_marcacoes).values())
-taxa_de_acerto_base = 100.0 * acerto_base / len(validacao_marcacoes)
+teste_real(modelo_vencedor, dados_reais, marcacoes_reais)
+
+acerto_base = max(Counter(marcacoes_reais).values())
+taxa_de_acerto_base = 100.0 * acerto_base / len(marcacoes_reais)
 print("Taxa de acerto base: %f" % taxa_de_acerto_base)
 
-total_de_elementos = len(validacao_dados)
+total_de_elementos = len(dados_reais)
 print("Total de teste: %d" % total_de_elementos)

@@ -21,9 +21,6 @@ Ydummies_df = Y_df
 X = Xdummies_df.values
 Y = Ydummies_df.values
 
-
-
-
 porcentagem_de_treino = 0.8
 porcentagem_de_teste = 0.1
 
@@ -40,7 +37,6 @@ teste_marcacoes = Y[int(tamanho_de_treino):int(fim_de_teste)]
 
 validacao_dados = X[int(fim_de_teste):]
 validacao_marcacoes = Y[int(fim_de_teste):]
-
 
 
 
@@ -67,6 +63,12 @@ resultadoMultinomial = fit_and_predict("MultinomialNB", modeloMultinomial, trein
 from sklearn.ensemble import AdaBoostClassifier
 modeloAdaBoost = AdaBoostClassifier()
 resultadoAdaBoost = fit_and_predict("AdaBoostClassifier", modeloAdaBoost, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
+
+
+# from sklearn import svm
+# modeloSVM = svm.SVC(gamma=0.001, C=100)
+# resultadoSVM = fit_and_predict("SVM", modeloSVM, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
+
 
 if resultadoMultinomial > resultadoAdaBoost:
 	vencedor = modeloMultinomial

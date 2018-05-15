@@ -3,7 +3,7 @@ DIR=str(pathlib.Path(__file__).resolve().parent)
 
 import csv
 
-def carregar_acessos():
+def low_page_access():
     X = []
     Y = []
 
