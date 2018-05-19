@@ -15,6 +15,11 @@ model = MultinomialNB()
 model.fit(data_train, target_train)
 
 result_from_model = model.predict(data_test)
+
+print(target_test)
+print(result_from_model)
+
+
 deltas = result_from_model - target_test
 
 hits = [d for d in deltas if d == 0]

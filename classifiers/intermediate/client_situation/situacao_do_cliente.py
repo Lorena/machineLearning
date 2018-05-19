@@ -62,15 +62,15 @@ resultados = {}
 
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.svm import LinearSVC
-modeloOneVsRestClassifier = OneVsRestClassifier(LinearSVC(random_state = 0))
-resultadoOneVsRestClassifier = fit_and_predict("OneVsRestClassifier", modeloOneVsRestClassifier, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
-resultados[resultadoOneVsRestClassifier] = modeloOneVsRestClassifier
+modeloOneVsRestClassifierWithSVC = OneVsRestClassifier(LinearSVC(random_state = 0))
+resultadoOneVsRestClassifier = fit_and_predict("OneVsRestClassifier", modeloOneVsRestClassifierWithSVC, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
+resultados[resultadoOneVsRestClassifier] = modeloOneVsRestClassifierWithSVC
 
 from sklearn.multiclass import OneVsOneClassifier
 from sklearn.svm import LinearSVC
-modeloOneVsRestClassifier = OneVsOneClassifier(LinearSVC(random_state = 0))
-resultadoOneVsRestClassifier = fit_and_predict("OneVsOneClassifier", modeloOneVsRestClassifier, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
-resultados[resultadoOneVsRestClassifier] = modeloOneVsRestClassifier
+modeloOneVsOneClassifierWithSVC = OneVsOneClassifier(LinearSVC(random_state = 0))
+resultadoOneVsOneClassifier = fit_and_predict("OneVsOneClassifier", modeloOneVsOneClassifierWithSVC, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
+resultados[resultadoOneVsOneClassifier] = modeloOneVsOneClassifierWithSVC
 
 from sklearn.naive_bayes import MultinomialNB
 modeloMultinomial = MultinomialNB()
@@ -86,7 +86,7 @@ maximo = max(resultados)
 vencedor = resultados[maximo]
 
 print("Vencedor")
-print(vencedor)
+# print(vencedor)
 
 teste_real(vencedor, validacao_dados, validacao_marcacoes)
 

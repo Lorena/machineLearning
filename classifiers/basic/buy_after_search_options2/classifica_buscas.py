@@ -65,11 +65,6 @@ modeloAdaBoost = AdaBoostClassifier()
 resultadoAdaBoost = fit_and_predict("AdaBoostClassifier", modeloAdaBoost, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
 
 
-# from sklearn import svm
-# modeloSVM = svm.SVC(gamma=0.001, C=100)
-# resultadoSVM = fit_and_predict("SVM", modeloSVM, treino_dados, treino_marcacoes, teste_dados, teste_marcacoes)
-
-
 if resultadoMultinomial > resultadoAdaBoost:
 	vencedor = modeloMultinomial
 else:
